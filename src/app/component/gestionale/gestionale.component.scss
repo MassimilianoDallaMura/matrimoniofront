@@ -1,0 +1,93 @@
+.notification {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 15px;
+  border-radius: 5px;
+  color: #fff;
+  z-index: 1000;
+  background-color: #4caf50; /* Default success color */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification.success {
+  background-color: #4caf50; /* Green for success */
+}
+
+.notification.error {
+  background-color: #f44336; /* Red for error */
+}
+
+.notification button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Stile per il pulsante abilitato */
+.btn-enabled {
+background-color: #df914c; /* Colore di sfondo quando il pulsante è abilitato */
+color: white; /* Colore del testo quando il pulsante è abilitato */
+border: 1px solid #df914c; /* Bordo del pulsante quando è abilitato */
+}
+
+/* Stile per il pulsante disabilitato */
+.btn-disabled {
+background-color: rgba(223, 145, 76, 0.5); /* Colore di sfondo più opaco */
+color: rgba(255, 255, 255, 0.7); /* Colore del testo più opaco */
+border: 1px solid rgba(223, 145, 76, 0.5); /* Bordo più opaco */
+cursor: not-allowed; /* Cambia il cursore per indicare che non è cliccabile */
+}
+
+.fas {
+transition: transform 0.3s;
+}
+
+.card-container {
+display: flex;
+flex-wrap: wrap;
+gap: 10px; /* Distanza tra le card */
+}
+
+.cardAllergie {
+background: #8e8c8c; /* Colore di sfondo della card */
+border: 1px solid #ddd; /* Bordo della card */
+border-radius: 8px; /* Angoli arrotondati */
+padding: 15px; /* Spazio interno della card */
+width: 150px; /* Larghezza della card */
+text-align: center; /* Allineamento del testo */
+font-size: 16px; /* Dimensione del testo */
+color: var(--text-color); /* Colore del testo, usa la variabile CSS definita */
+}
+
+.autocomplete-dropdown {
+position: absolute; /* Assicurati che il dropdown sia posizionato correttamente */
+max-height: 150px; /* Altezza massima maggiore per visibilità */
+max-width: calc(100vw - 60px); /* Larghezza massima in base alla larghezza della finestra meno un piccolo margine */
+margin-left: 30px;
+overflow-y: auto; /* Aggiunge lo scroll se necessario */
+background-color: #ffffff88; /* Colore di sfondo bianco per migliorare la visibilità del testo */
+border: 1px solid #ccc;
+border-bottom-left-radius: 8px;
+border-bottom-right-radius: 8px;
+z-index: 1000; /* Assicura che il dropdown sia sopra altri elementi */
+left: 0; /* Allinea il dropdown al lato sinistro del contenitore */
+right: 0; /* Assicura che non esca dallo schermo */
+box-sizing: border-box; /* Include padding e bordo nella larghezza totale */
+}
+
+
+.autocomplete-option {
+padding: 8px;
+cursor: pointer;
+color: #000000; /* Colore del testo per contrastare con lo sfondo */
+}
+
+.autocomplete-option:hover {
+background-color: #f0f0f0; /* Colore di sfondo al passaggio del mouse per migliorare l'interazione */
+}

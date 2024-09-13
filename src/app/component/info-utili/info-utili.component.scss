@@ -1,0 +1,22 @@
+.btn-custom {
+  background-color: #df914c;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+  align-items: center;
+  color: white;
+  border: 2px solid #000000; 
+  margin-bottom: 20px; /* Spazio tra i pulsanti */
+  font-size: 1rem; /* Dimensione del testo */
+  height: 60px;
+}
+
+.btn-icon {
+  margin-left: 1rem;
+  font-size: 1.25rem; /* Dimensione dell'icona */
+}
+
+.custom-accordion .accordion-button::after {
+  filter: invert(100%);
+}

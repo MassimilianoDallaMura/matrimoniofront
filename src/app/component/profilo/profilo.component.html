@@ -1,0 +1,210 @@
+<div style="margin-top: 70px; margin-left: 10px; margin-right: 10px;">
+  <div style="margin-left: 10px; margin-right: 10px; margin-bottom: 90px;">
+  <!-- Sezione per l'utente normale -->
+  <div *ngIf="isNormalUser" class="user-profile">
+    <header class="header">
+      <h2 style="text-align: center;">Perfil</h2>
+    </header>
+
+    <section class="profile-info" style="margin-top: 10px; margin-bottom: 30px;">
+      <h3>
+        {{ invitati?.firstName }} {{ invitati?.lastName }}
+        <ng-container *ngIf="invitati?.partecipazione === 'CONFIRMADO'">
+          <span class="status confirmed">
+            <i class="fas fa-check-circle"></i>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="invitati?.partecipazione === 'RECHAZADO'">
+          <span class="status rejected">
+            <i class="fas fa-times-circle"></i>
+          </span>
+        </ng-container>
+        <ng-container *ngIf="invitati?.partecipazione === 'PENDIENTE'">
+          <span class="status pending">
+            <i class="fas fa-hourglass-half"></i>
+          </span>
+        </ng-container>
+      </h3>
+
+      <div class="grid-container">
+        <div class="grid-item"><h5>Alergias:</h5></div>
+        <div class="grid-item"><p>{{ invitati?.allergies }}</p></div>
+        <div class="grid-item"><h5>Dieta:</h5></div>
+        <div class="grid-item"><p>{{ invitati?.dieta }}</p></div>
+
+        <ng-container *ngIf="invitati?.plusOneAllowed">
+          <div class="grid-item grid-span-2 header-underline">
+            <h4><strong>Datos del acompañante:</strong></h4>
+          </div>
+          <div class="grid-item"><p>{{ invitati?.plusOne?.firstName }} {{ invitati?.plusOne?.lastName }}</p></div>
+          <div class="grid-item"><h5>Alergias:</h5></div>
+          <div class="grid-item"><p>{{ invitati?.plusOne?.allergies }}</p></div>
+          <div class="grid-item"><h5>Dieta:</h5></div>
+          <div class="grid-item"><p>{{ invitati?.plusOne?.dieta }}</p></div>
+        </ng-container>
+      </div>
+
+      <div class="settings-section">
+        <div class="settings-container">
+          <button 
+          (click)="toggleSettings()" 
+          [disabled]="isToggleDisabled()">
+          {{ showSettings ? "Cerrar el panel" : "Edita tu información" }}
+        </button>
+        
+          <p>¡Tienes hasta el 20.09.2024 para cambiarlos!</p>
+        </div>
+
+        <ng-container *ngIf="showSettings">
+          <div class="settings-content" style="margin-top: 10px;">
+            <!-- Campo di conferma della partecipazione -->
+            <div class="custom-bordered-div">
+              <h5>Contamos contigo?</h5>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="participazione" value="YES" [(ngModel)]="participation" />
+                  <span class="radio-label">Si</span>
+                </label>
+                <label>
+                  <input type="radio" name="participazione" value="NO" [(ngModel)]="participation" />
+                  <span class="radio-label">No</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Campo + 1 -->
+            <ng-container *ngIf="invitati?.plusOneAllowed">
+              <div class="custom-bordered-div" style="margin-top: 10px;">
+                <h5>Alguien te acompañará?</h5>
+                <div class="radio-group">
+                  <label>
+                    <input type="radio" name="plus" value="YES" [(ngModel)]="plus" />
+                    <span class="radio-label">Si</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="plus" value="NO" [(ngModel)]="plus" />
+                    <span class="radio-label">No</span>
+                  </label>
+                </div>
+
+                <ng-container *ngIf="plus === 'YES'">
+                  <div class="plus-one-info">
+                    <label for="plus-one-name">Nombre del más uno:</label>
+                    <input id="plus-one-name" type="text" [(ngModel)]="plusOneName" placeholder="Introduce el nombre del acompañante" />
+
+                    <label for="plus-one-lastname">Apellido del más uno:</label>
+                    <input id="plus-one-lastname" type="text" [(ngModel)]="plusOneLastName" placeholder="Introduce el apellido del acompañante" />
+
+                    <label for="plus-one-allergies">Alergies del más uno:</label>
+                    <input id="plus-one-allergies" type="text" [(ngModel)]="plusOneAllergies" placeholder="Introduzca las alergias del acompañante." />
+
+                    <label>La dieta del acompañante:</label>
+                    <div class="radio-group">
+                      <label>
+                        <input type="radio" name="plusDiet" value="ONNIVORA" [(ngModel)]="plusDiet" />
+                        <span class="radio-label">Omnívora</span>
+                      </label>
+                      <label>
+                        <input type="radio" name="plusDiet" value="VEGANA" [(ngModel)]="plusDiet" />
+                        <span class="radio-label">Vegano</span>
+                      </label>
+                      <label>
+                        <input type="radio" name="plusDiet" value="VEGETARIANA" [(ngModel)]="plusDiet" />
+                        <span class="radio-label">Vegetariano</span>
+                      </label>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </ng-container>
+
+            <!-- Campo allergie -->
+            <div class="custom-bordered-div" style="margin-top: 10px;">
+              <h5>Que dieta prefieres?</h5>
+              <div class="radio-group">
+                <label>
+                  <input type="radio" name="diet" value="ONNIVORA" [(ngModel)]="diet" />
+                  <span class="radio-label">Omnívora</span>
+                </label>
+                <label>
+                  <input type="radio" name="diet" value="VEGANA" [(ngModel)]="diet" />
+                  <span class="radio-label">Vegano</span>
+                </label>
+                <label>
+                  <input type="radio" name="diet" value="VEGETARIANA" [(ngModel)]="diet" />
+                  <span class="radio-label">Vegetariano</span>
+                </label>
+              </div>
+              <h6 style="margin-top: 15px;">Cuéntanos si tienes alguna intolerancia o alergia</h6>
+              <label>
+                <input id="allergie" type="text" [(ngModel)]="allergie" placeholder="Escribe aquí tus alergias o intolerancias:" />
+              </label>
+            </div>
+
+            <ng-container *ngIf="confirmationMessage">
+              <p class="confirmation-message">{{ confirmationMessage }}</p>
+            </ng-container>
+
+            <button (click)="submitForm()" class="submit-button" style="margin-top: 15px;">Enviar</button>
+          </div>
+        </ng-container>
+      </div>
+
+      <!-- Sezione per la playlist Spotify -->
+      <div class="custom-bordered-div" style="margin-top: 20px;">
+        <h5><strong>Agrega una canción a esta playlist </strong> <br> 🎶</h5>
+        <p>Si quieres escuchar una canción en nuestro día especial, puedes añadirla a través de este enlace</p>
+        <a href="https://open.spotify.com/playlist/5H8r8Ss3SeaY2lLGx1Tkg8?si=uo50A6DFSQmgbjl2pQfSbQ&pi=ZEmcb6maSVypi" target="_blank" class="spotify-link">Abrir playlist en SPOTIFY</a>
+      </div>
+
+      <!-- Link drive foto -->
+      <div class="custom-bordered-div" style="margin-top: 20px;">
+        <h5><strong>Comparte tus fotos del matri </strong><br> 📸</h5>
+        <p>Ingresa a este link y carga las mejores fotos que tomaste en nuestro día.</p>
+        <a href="https://drive.google.com/drive/folders/1SI0YPuFANXcgcBX8DjLPweOEH0KFHWJ2" target="_blank" class="drive-link">Abra la carpeta de Google Drive</a>
+      </div>
+
+    </section>
+  </div>
+
+<!-- Sezione per la donazione -->
+<!-- <div class="accordion" id="donationAccordion" *ngIf="isNormalUser">
+  <h5>🎁</h5>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" (click)="toggleAccordion()" aria-expanded="true" aria-controls="collapseOne">
+        Si quieres hacernos un regalo, preferimos el big money!
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" [ngClass]="{'show': isAccordionOpen}" aria-labelledby="headingOne" data-bs-parent="#donationAccordion">
+      <div class="accordion-body"> -->
+
+        <!-- Mostra il contenuto della donazione -->
+        <!-- <p>{{ donationContent }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+ 
+
+  <div *ngIf="isAdmin" class="admin-profile">
+    <!-- Contenuto per l'amministratore -->
+    <app-gestionale></app-gestionale>
+  </div>
+
+   <!-- Campo di input e pulsante di salvataggio visibili solo per admin -->
+   <!-- <div *ngIf="isAdmin">
+    <div class="mb-3">
+      <label for="donationContentInput" class="form-label">Nuevo contenido de donación</label>
+      <input type="text" id="donationContentInput" class="form-control" [(ngModel)]="newDonationContent">
+    </div>
+    <button class="btn btn-primary" (click)="saveDonation()">Salva</button>
+  </div> -->
+
+  <button (click)="logout()" style="margin-top: 20px; background-color: #f44336; color: white; padding: 10px 20px; border-radius: 4px; border-color: white; cursor: pointer; width: 100%; margin-bottom: 20px;">
+    Cerrar sesión
+  </button>
+
+</div>
+</div>

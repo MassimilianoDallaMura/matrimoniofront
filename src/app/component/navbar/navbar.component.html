@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top z-1" style="background-color: #183446; padding-top: 10px; width: 100%; border-bottom: 1px solid black;">
+  <div class="container-fluid">
+    <div class="col-4">
+      <a class="navbar-brand grey-qo-regular" routerLink="/home" style="color: white;">D+G</a>
+    </div>
+    <div class="col-4 d-flex justify-content-center align-items-center">
+      <div class="theme-toggle" (click)="toggleTheme()">
+        <i class="fas fa-sun"></i>
+        <div class="toggle-btn" [class.dark]="isDarkMode"></div>
+        <i class="fas fa-moon"></i>
+      </div>
+    </div>
+    <div class="col-4 d-flex align-items-center justify-content-end">
+
+    </div>
+  </div>
+</nav>

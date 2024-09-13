@@ -1,0 +1,111 @@
+/* Stili generali */
+.grid {
+  margin: 70px 20px; /* Spazio intorno al contenitore */
+  min-height: 100vh; /* Altezza minima per la viewport */
+  overflow-y: auto; /* Abilita lo scorrimento verticale se necessario */
+  display: flex;
+  flex-direction: column; /* Disporre gli elementi in colonna */
+  box-sizing: border-box; /* Include padding e bordo nella larghezza e altezza totale */
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  text-transform: uppercase;
+  flex-grow: 1;
+  text-align: center;
+}
+
+/* Button group */
+.button-group {
+  margin-bottom: 20px;
+}
+
+/* Mappa e contenuto */
+.content-map-container {
+  display: flex;
+  flex-direction: column; /* Default per mobile */
+  gap: 20px; /* Spazio tra contenuto e mappa */
+  flex-grow: 1; /* Permette alla mappa di espandersi per riempire lo spazio */
+}
+
+/* Contenitore del contenuto */
+.content-box {
+  border-radius: 8px;
+  padding: 15px;
+  /* Altezza minima per evitare che il contenuto diventi troppo piccolo */
+  min-height: 200px; 
+}
+
+/* Mappa */
+#mappa {
+  width: 100%; /* Larghezza fissa per la mappa */
+  height: 300px; /* Altezza fissa per la mappa */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Assicurati che google-map si adatti al contenitore */
+google-map {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+/* Media query per schermi più grandi (desktop) */
+@media (min-width: 768px) {
+  .content-map-container {
+    flex-direction: row; /* Layout a colonna per desktop */
+    align-items: flex-start;
+    
+  }
+
+  #mappa {
+    width: 60%; /* Larghezza fissa per la mappa */
+    height: 50vh; /* Altezza fissa per desktop */
+  }
+}
+
+/* Media query per schermi molto grandi */
+@media (min-width: 1200px) {
+  .content-box {
+    width: 35%; /* Adatta la larghezza del contenuto per schermi molto grandi */
+  }
+
+  #mappa {
+    width: 65%; /* Adatta la larghezza della mappa per schermi molto grandi */
+  }
+}
+
+/* Pulsanti */
+.btn-custom {
+  background-color: #df914c;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: start;
+  align-items: center;
+  border: 2px solid white;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  height: 60px;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  border-radius: 8px;
+}
+
+.btn-text {
+  flex: 1;
+}
+
+.btn-icon {
+  margin-left: 1rem;
+  font-size: 1.25rem;
+}

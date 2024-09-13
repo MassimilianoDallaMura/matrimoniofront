@@ -1,0 +1,222 @@
+<div style="margin-top: 50px; margin-left: 10px; margin-right: 10px;">
+  <div style="margin-top: 100px; margin-left: 10px; margin-right: 10px; margin-bottom: 80px;">
+    <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+      <h2 style="text-transform: uppercase; text-align: center; flex-grow: 1;">Perfil</h2>
+    </div>
+
+    <!-- Notifica -->
+    <div *ngIf="notification" class="notification" [ngClass]="{'success': notification.type === 'success', 'error': notification.type === 'error'}">
+      {{ notification.message }}
+      <button (click)="closeNotification()">X</button>
+    </div>
+
+    <div style="margin-top: 20px;">
+      <!-- Contenitore flessibile centrato e con larghezza al 100% -->
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <h2 style="margin: 0;">Agrega invidato</h2>
+        <i (click)="toggleFormVisibility()" 
+           [ngClass]="isFormVisible ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"
+           style="font-size: 24px; cursor: pointer; color: #df914c; transition: color 0.3s; margin-left: 10px;">
+        </i>
+      </div>
+      
+      <!-- Sezione del form con visibilità condizionale -->
+      <div *ngIf="isFormVisible" style="margin-top: 20px;">
+        <form [formGroup]="invitatiForm" (ngSubmit)="onSubmit()" style="padding: 10px;">
+          <div style="margin-bottom: 10px;">
+            <label for="firstName"><strong>Nombres:</strong></label>
+            <input id="firstName" formControlName="firstName" placeholder="Ingresar los nombres" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label for="lastName"><strong>Apellidos:</strong></label>
+            <input id="lastName" formControlName="lastName" placeholder="Ingresar los apellidos" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label for="username">Usuario:</label>
+            <input id="username" type="text" formControlName="username" placeholder="Ingresar el usuario" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label for="password">Contraseña:</label>
+            <input id="password" type="text" formControlName="password" placeholder="Ingresar la contraseña" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" />
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label for="plusOneAllowed"><strong>Persona acompañante:</strong></label>
+            <input id="plusOneAllowed" type="checkbox" formControlName="plusOneAllowed" style="margin-left: 10px;"/>
+          </div>
+          <button type="submit" 
+                  [ngClass]="{'btn-disabled': !invitatiForm.valid, 'btn-enabled': invitatiForm.valid}"
+                  style="margin-top: 10px; padding: 10px 20px; border-radius: 4px; cursor: pointer; border-color: white;">
+            {{ editingInvitato ? 'Aggiorna' : 'Agrega' }} invitada/o
+          </button>
+        </form>
+      </div>
+ 
+    
+    </div>
+
+    
+
+
+      <!-- LISTA Invitati -->
+      <div style="padding: 10px; margin-top: 30px;">
+        <h2 style="color: var(--text-color);"><strong>Lista de invitadas/os</strong></h2>
+        
+        <div style="margin-bottom: 20px;">
+          <input 
+            type="text" 
+            [(ngModel)]="searchTerm" 
+            placeholder="Buscar por nombres y apellidos" 
+            style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+          />
+        </div>
+
+        <div style="margin-top: 20px;">
+          <!-- Pulsante di toggle -->
+          <button (click)="showFilters = !showFilters" style="background-color: #df914c; color: white; border: 2px solid #ffffff; padding: 10px 20px; border-radius: 4px; cursor: pointer;">
+            {{ showFilters ? 'ocultar filtros' : 'Vista filtros' }}
+          </button>
+        
+          <!-- Contenitore filtri -->
+          <div *ngIf="showFilters">
+            <!-- Filtro per partecipazione -->
+            <div style="margin-top: 20px;">
+              <label for="partecipazioneFilter">filtrar por participación:</label>
+              <select id="partecipazioneFilter" [(ngModel)]="partecipazioneFilter" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Todo</option>
+                <option value="CONFIRMADO">Confirma</option>
+                <option value="RECHAZADO">Rechazada</option>
+                <option value="PENDIENTE">Pendiente</option>
+              </select>
+            </div>
+        
+          <!-- Filtro per allergie -->
+          <div style="margin-top: 20px;">
+            <label for="allergieFilter">filtro para alergias:</label>
+            <input 
+              id="allergieFilter" 
+              type="text" 
+              [(ngModel)]="allergieFilter" 
+              (click)="toggleDropdown()" 
+              placeholder="Entrar alergias" 
+              style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;"
+            />
+            <div 
+              *ngIf="showDropdown" 
+              class="autocomplete-dropdown" 
+              style="position: absolute; width: 100%; border: 1px solid #ccc; border-top: none; background: white; z-index: 1000;"
+            >
+              <div 
+                *ngFor="let allergy of getUniqueAllergies()" 
+                (click)="selectAllergy(allergy)" 
+                class="autocomplete-option" 
+                style="padding: 8px; cursor: pointer; border-bottom: 1px solid #eee;"
+              >
+                {{ allergy }}
+              </div>
+            </div>
+          </div>
+
+        
+            <!-- Filtro per dieta -->
+            <div style="margin-top: 20px;">
+              <label for="dietaFilter">filtrar por dieta:</label>
+              <select id="dietaFilter" [(ngModel)]="dietaFilter" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                <option value="">Todo</option>
+                <option value="VEGANA">Vegana</option>
+                <option value="VEGETARIANA">Vegetariana</option>
+                <option value="ONNIVORA">Omnivora</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        
+    
+
+          <!-- lista invitati -->
+
+
+        <div class="row">
+          <div *ngFor="let invitato of filteredInvitati()" class="col-12 col-md-4 col-xl-3 mb-4" style="margin-top: 20px;">
+            <div class="card" style="height: auto; display: flex; flex-direction: column; background-color: #7a505efe;">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title" style="color: var( --card-text-color);">{{ invitato.firstName }} {{ invitato.lastName }}</h5>
+                <div class="d-flex align-items-center mb-2">
+                  <span *ngIf="invitato.partecipazione === 'CONFIRMADO'" class="text-success mr-2">
+                    <i class="fas fa-check-circle"></i>
+                  </span>
+                  <span *ngIf="invitato.partecipazione === 'RECHAZADO'" class="text-danger mr-2">
+                    <i class="fas fa-times-circle"></i>
+                  </span>
+                  <span *ngIf="invitato.partecipazione === 'PENDIENTE'" class="text-warning mr-2">
+                    <i class="fas fa-hourglass-half"></i>
+                  </span>
+                  <p class="mb-0" [ngStyle]="{
+                    'color': invitato.partecipazione === 'CONFIRMADO' ? 'green' :
+                             invitato.partecipazione === 'RECHAZADO' ? 'red' : 'orange'
+                  }">
+                    {{ invitato.partecipazione === 'CONFIRMADO' ? 'Participación confirmada' :
+                       invitato.partecipazione === 'RECHAZADO' ? 'Participación rechazada' :
+                       'Participación en espera' }}
+                  </p>
+                </div>
+
+                <!-- Pulsante per espandere i dettagli -->
+                <button (click)="toggleDetails(invitato.id)" class="btn btn-secondary mb-2" style="background-color: #df914c; border-color: white">
+                  {{ expanded[invitato.id] ? 'Ocultar detalles' : 'Muestra detalles' }}
+                </button>
+
+                <!-- Dettagli espandibili -->
+                <div *ngIf="expanded[invitato.id]" class="expandable-content">
+                  <div class="d-flex align-items-center mb-2">
+                    <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px;"
+                          [ngStyle]="{'background-color': invitato.plusOneAllowed ? 'green' : 'red'}">
+                    </span>
+                    <p class="mb-0" style="color: var(--text-color);">Derecho a más uno</p>
+                  </div>
+                  <div class="flex-grow-1 mb-2">
+                    <div style="color: var(--text-color);"><strong>Alergias: </strong>{{ invitato.allergies ? invitato.allergies.join(', ') : 'Nessuna' }}</div>
+                    <div style="color: var(--text-color);"><strong>Dieta:</strong> {{ invitato.dieta }}</div>
+                  </div>
+                  <div *ngIf="invitato.plusOne" class="mb-2">
+                    <h6 class="mb-1" style="color: var(--text-color); text-decoration: underline;"><strong>Informazioni +1:</strong></h6>
+                    <div style="color: var(--text-color);"><strong>Nome:</strong> {{ invitato.plusOne.firstName }}</div>
+                    <div style="color: var(--text-color);"><strong>Nombre:</strong> {{ invitato.plusOne.lastName }}</div>
+                    <div style="color: var(--text-color);"><strong>Alergias:</strong> {{ invitato.plusOne.allergies ? invitato.plusOne.allergies.join(', ') : 'Nessuna' }}</div>
+                    <div style="color: var(--text-color);"><strong>Dieta:</strong> {{ invitato.plusOne.dieta }}</div>
+                  </div>
+                </div>
+
+                
+                <div class="d-flex" style="width: 100%;">
+                  <button (click)="deleteInvitato(invitato.id)" 
+                          class="btn btn-danger" 
+                          style="border-color: white; flex-grow: 1; margin-right: 5px;">
+                          Eliminar
+                  </button>
+                  <button (click)="toggleAdminRole(invitato)" 
+                          class="btn btn-warning" 
+                          style="border-color: white; flex-grow: 1;">
+                    {{ invitato.ruolo === 'ADMIN' ? 'Eliminar Admin' : 'Agregar Admin' }}
+                  </button>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visualizza tutte le allergie uniche -->
+
+        <div style="margin-top: 20px;">
+          <h2 style="color: var(--text-color);"><strong>Lista de alergias</strong></h2>
+          <div class="card-container">
+            <div class="cardAllergie" *ngFor="let allergy of getUniqueAllergies()">
+              {{ allergy }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

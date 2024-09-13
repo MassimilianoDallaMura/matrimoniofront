@@ -1,0 +1,249 @@
+/* styles.scss */
+
+
+
+h1, h2, h3, h4, h5, h6, p, span, div {
+  color: var(--text-color);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    border-radius: 20px;
+    padding: 5px;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  .theme-toggle i {
+    color: #ffffff; /* colore del sole */
+    margin: 0 5px;
+  }
+  
+  .theme-toggle i.fa-moon {
+    color: #f78f70; /* colore della luna */
+  }
+  
+  .toggle-btn {
+    background-color: rgba(255, 255, 255, 0.20); /* 80% opaco, 20% trasparente */
+    border-radius: 50%;
+    border: 1px solid white;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    left: 5px; /* Posizione iniziale */
+    transition: transform 0.3s, left 0.3s;
+  }
+  
+  .toggle-btn.dark {
+    left: auto;
+    right: 5px;
+  }
+  
+/* Tema Light */
+body.light-mode {
+  --border-color: #5c112a; /* Colore del bordo */
+  --button-border-color: white;
+  --background-color: #f9f1f1;
+  --text-color: #5c112a; /* Colore generale del testo */
+  --card-text-color: #5c112a; /* Colore del testo della card title */
+  --card-background-color: #f8f9fa;
+  --card-border-color: #5c112a; /* Colore del bordo della card in modalità chiara */
+  --accordion-header-bg: #df914c;
+  --accordion-header-color: white;
+  --accordion-body-bg: #f8f9fa;
+  --accordion-body-color: #000;
+  --active-icon-color: #df914c;
+}
+
+/* Applica il colore del bordo al contenitore del modulo */
+body.light-mode .login-container {
+  border-color: var(--border-color); /* Usa la variabile definita per il tema */
+}
+
+
+/* Tema Dark */
+body.dark-mode {
+  --border-color: #5c112a;
+  --button-border-color: white;
+  --background-color: #f78f70;
+  --text-color: #ffffff;
+  --card-text-color: white; /* Mantiene il colore del testo generale */
+  --card-background-color: #fbb2a9; 
+  --card-border-color: #5c112a; /* Colore del bordo della card in modalità scura */
+  --accordion-header-bg: #df914c;
+  --accordion-header-color: white;
+  --accordion-body-bg: #ae3960;
+  --accordion-body-color: #ffffff;
+  --active-icon-color: #df914c;
+}
+
+/* Modifica la card title per usare il colore del tema */
+.card-title {
+  color: var(--card-text-color); /* Utilizza la variabile del tema attivo */
+}
+
+  
+  .custom-bordered-div {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  /* Applica variabili */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  .card {
+    background-color: var(--card-background-color);
+    border-color: var(--card-border-color);
+  }
+  
+  /* Accordion Styles */
+  .accordion-button {
+    background-color: var(--accordion-header-bg) !important;
+    color: var(--accordion-header-color) !important;
+  }
+  
+  .accordion-body {
+    background-color: var(--accordion-body-bg) !important;
+    color: var(--accordion-body-color) !important;
+  }
+  
+  .btn-custom {
+    border: 1px solid var(--button-border-color); /* Utilizza la variabile per il colore del bordo */
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: var(--text-color);
+}
+
+.btn-custom:hover {
+    background-color: var(--border-color); /* Cambia colore dello sfondo al passaggio del mouse */
+    color: var(--background-color);
+}
+
+
+
+// FONT
+
+
+.ubuntu-light {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.ubuntu-regular {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.ubuntu-medium {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.ubuntu-bold {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ubuntu-light-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.ubuntu-regular-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.ubuntu-medium-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.ubuntu-bold-italic {
+  font-family: "Ubuntu", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
+.grey-qo-regular {
+  font-family: "Grey Qo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
+
+/* Stili generali per l'immagine */
+img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px; /* Aggiungi il border-radius di 16px agli angoli */
+  display: block;
+  margin: 0 auto;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 767px) {
+  img {
+    width: calc(100vw - 40px); /* Larghezza dell'immagine meno i margini */
+    height: auto; /* Altezza automatica per mantenere le proporzioni */
+    max-width: 100%; /* Assicura che l'immagine non superi la larghezza dello schermo */
+    border-radius: 16px; /* Border-radius mantenuto anche per i dispositivi mobili */
+  }
+}
+
+/* Media query per tablet */
+@media (min-width: 768px) and (max-width: 1024px) {
+  img {
+    width: calc(100vw - 40px); /* Larghezza dell'immagine meno i margini */
+    height: auto; /* Altezza automatica per mantenere le proporzioni */
+    max-width: 100%; /* Assicura che l'immagine non superi la larghezza dello schermo */
+    border-radius: 16px; /* Border-radius mantenuto anche per i tablet */
+  }
+}
+
+/* Media query per desktop */
+@media (min-width: 1025px) {
+  img {
+    width: auto;
+    height: calc(100vh - 450px); /* Altezza dell'immagine meno i margini */
+    max-width: 100%; /* Larghezza massima dell'immagine non supera il 100% della larghezza del contenitore */
+    object-fit: cover; /* Adatta l'immagine per coprire completamente l'area disponibile */
+    border-radius: 16px; /* Border-radius mantenuto anche per i desktop */
+  }
+}
+
+
+
+/* Stile base per il testo del footer */
+.footer-text {
+  font-size: 11px;
+  color: white;
+  margin-bottom: 0;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 767px) {
+  .footer-text {
+    font-size: 8px;
+  }
+}
+

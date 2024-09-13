@@ -1,0 +1,47 @@
+/* Stile per mobile (default) */
+.custom-quote {
+  font-size: 1.4rem;
+}
+
+/* Stile per tablet e desktop */
+@media (min-width: 768px) {
+  .custom-quote {
+    font-size: 2rem;
+  }
+}
+
+.btn-custom {
+  background-color: #df914c;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid white; 
+  margin-bottom: 0.5rem;
+  font-size: 1rem; 
+  height: 60px;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  text-align: start;
+}
+
+.btn-text {
+  flex: 1;
+}
+
+.btn-icon {
+  margin-left: 1rem;
+  font-size: 1.25rem; 
+}
+
+.custom-margin {
+  margin-top: 40px; /* Default per schermi mobili */
+  margin-bottom: 90px; /* Margin-bottom invariato */
+}
+
+@media (min-width: 768px) {
+  .custom-margin {
+    margin-top: 130px; /* Modifica il margin-top per tablet e desktop */
+  }
+}

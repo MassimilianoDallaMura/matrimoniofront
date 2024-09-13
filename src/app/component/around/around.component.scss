@@ -1,0 +1,84 @@
+/* around.component.scss */
+
+/* Stile per il contenitore della card */
+.accomodation-card {
+  border: 1px solid #ddd; /* Bordo delle card */
+  border-radius: 16px; /* Angoli arrotondati di 16px */
+  overflow: hidden; /* Assicurati che le immagini non escano dai bordi della card */
+  display: flex;
+  flex-direction: column; /* Dispone il contenuto verticalmente */
+  height: 100%; /* Imposta l'altezza della card al 100% del suo contenitore */
+}
+
+/* Stile per il contenitore dell'immagine */
+.image-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Assicurati che le immagini non escano dai bordi del contenitore */
+}
+
+
+/* Stile per il corpo della card */
+.card-body {
+  flex: 1; /* Permette al corpo della card di riempire lo spazio rimanente */
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenitore per le categorie */
+.category-container {
+  display: flex; /* per allineare orizzontalmente */
+  flex-wrap: wrap; /* andare a capo se necessario */
+  margin-top: auto; /* Spinge il contenitore delle categorie verso il basso */
+}
+
+/* Colori per le categorie */
+.category-badge.dormir {
+  color: #007bff;
+}
+
+.category-badge.comer {
+  color: #ffc107;
+}
+
+/* Media Query per dispositivi mobili */
+@media (max-width: 767px) {
+  .accomodation-card {
+    height: 340px; /* Imposta un'altezza fissa per la card su dispositivi mobili */
+  }
+
+  .image-container {
+    padding-top: 100%; /* Mantiene il rapporto di aspetto quadrato anche su mobile */
+  }
+
+  .card-body {
+    padding: 1em; /* Padding per il corpo della card su mobile */
+  }
+}
+
+/* Stile per il pulsante link */
+.text-center .btn-link {
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  font-size: 1em;
+  font-weight: 400;
+  text-align: center;
+  border: 2px solid #df914c; /* Colore del bordo */
+  color: #012232; /* Colore del testo */
+  background-color: transparent; /* Trasparente per l'aspetto outline */
+  border-radius: 0.25rem; /* Angoli arrotondati */
+  text-decoration: none; /* Rimuove la sottolineatura */
+}
+
+.text-center .btn-link:hover {
+  background-color: #df914c; /* Colore di sfondo al passaggio del mouse */
+  color: white; /* Colore del testo al passaggio del mouse */
+}
+
+.ig {
+  color: #d301c5;
+  ;
+  padding: 20px;
+  margin: 0;
+}

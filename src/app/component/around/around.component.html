@@ -1,0 +1,85 @@
+<div style="margin-top: 70px; margin-left: 10px; margin-right: 10px; padding-bottom: 100px;">
+  <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; width: 100%;">
+    <i class="fas fa-chevron-left" style="cursor: pointer; margin-right: 10px;" (click)="goBack()"></i>
+    <h2 style="text-transform: uppercase; text-align: center; flex-grow: 1;">ALREDEDORES</h2>
+  </div>
+
+  <!-- Filter Buttons -->
+  <div style="margin-bottom: 20px;">
+    <div class="d-flex justify-content-center">
+      <button (click)="selectCategory('comer')" [ngClass]="{'btn-warning': selectedCategory === 'comer', 'btn-outline-warning': selectedCategory !== 'comer'}" class="btn mx-2">Comer</button>
+      <button (click)="selectCategory('dormir')" [ngClass]="{'btn-primary': selectedCategory === 'dormir', 'btn-outline-primary': selectedCategory !== 'dormir'}" class="btn mx-2">Dormir</button>
+      <button (click)="showAll()" class="btn btn-secondary mx-2">All</button>
+    </div>
+  </div>
+
+  <!-- Add Recommendation Button -->
+  <div *ngIf="isAdmin" class="d-flex justify-content-center mb-4">
+    <button class="btn btn-success" (click)="toggleAddRecommendationForm()">Aggiungi Raccomandazione</button>
+  </div>
+
+  <!-- Recommendation Form -->
+  <div *ngIf="showRecommendationForm" style="margin-bottom: 20px;">
+    <form (ngSubmit)="addRaccomandazione()" #recommendationForm="ngForm" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="title">Titolo:</label>
+        <input type="text" id="title" class="form-control" [(ngModel)]="newRaccomandazione.titolo" name="titolo" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Descrizione:</label>
+        <textarea id="description" class="form-control" [(ngModel)]="newRaccomandazione.descrizione" name="descrizione" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" class="form-control" [(ngModel)]="newRaccomandazione.categoria" name="categoria" required multiple>
+          <option value="comer">Comer</option>
+          <option value="dormir">Dormir</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="images">Immagini:</label>
+        <input type="file" id="images" class="form-control" (change)="onFileChange($event)" multiple>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3">Salva Raccomandazione</button>
+    </form>
+  </div>
+
+  <div *ngIf="loading" class="d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+
+  <!-- Cards Container -->
+  <div *ngIf="!loading">
+    <div class="row accomodation-cards-container">
+      <div class="col-6 col-md-4 col-lg-3 mb-4" *ngFor="let card of filteredCards">
+        <div class="accomodation-card">
+          <div *ngFor="let img of card.images; let i = index" [ngClass]="{'active': i === currentImageIndex[card.titolo]}">
+            <img [src]="img" alt="{{ card.titolo }}" class="img-fluid mb-3">
+            <a [href]="card.link" target="_blank" class="ig">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title" style="font-size: 18px;">{{ card.titolo }}</h5>
+            <p class="card-text">{{ card.descrizione }}</p>
+            <div class="category-container">
+              <ng-container *ngIf="card.categoria.length > 0">
+                <span *ngFor="let cat of card.categoria" [ngClass]="getCategoryClass(cat)">{{ cat }}</span>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Section -->
+  <div class="text-center mt-4">
+    <h4>Explora otras alternativas</h4>
+    <p>
+      Busca en <a href="https://www.tripadvisor.it/Tourism-g1580660-Ayampe_Manabi_Province-Vacations.html" target="_blank" class="btn-link">TripAdvisor</a>
+    </p>
+  </div>
+</div>

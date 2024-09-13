@@ -1,0 +1,159 @@
+.btn-custom {
+  background-color: #df914c;
+  width: 100%; /* Assicura che il pulsante occupi tutta la larghezza del contenitore */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid white; 
+  margin-bottom: 0.5rem; /* Spazio tra i pulsanti */
+  font-size: 1rem; /* Dimensione del testo */
+  height: 60px;
+  color: white;
+  text-transform: uppercase;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Aggiungi transizioni per un effetto più fluido */
+}
+
+.btn-text {
+  flex: 1; /* Occupa tutto lo spazio disponibile */
+  text-align: center; /* Centra il testo all'interno del pulsante */
+}
+
+.btn-icon {
+  margin-left: 1rem;
+  font-size: 1.25rem; /* Dimensione dell'icona */
+}
+
+.custom-radio {
+  display: none;
+}
+
+.custom-radio + .radio-label::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  vertical-align: middle;
+  background-color: transparent;
+}
+
+.custom-radio:checked + .radio-label::before {
+  background-color: #d60201;
+  border-color: white;
+}
+
+.custom-radio {
+  margin-right: 10px;
+}
+
+.radio-label {
+  font-size: 1rem;
+  color: var(--text-color); /* Utilizza la variabile del tema per il colore del testo */
+}
+
+/* Stile per i pulsanti in colonna */
+.custom-bordered-div label {
+  display: flex;
+  align-items: center;
+}
+
+.custom-bordered-div label + label {
+  margin-top: 10px; /* Spazio tra le opzioni radio */
+}
+
+.accordion {
+  margin-top: 20px;
+  background-color: transparent;
+  color: #444;
+  cursor: pointer;
+  padding: 15px;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #df914c;
+}
+
+
+
+.accordion-content {
+  display: none;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.accordion-content.show {
+  display: block;
+}
+
+/* Impostazioni generali per mobile e tablet */
+.settings-container {
+  display: flex;
+  align-items: center; /* Allinea verticalmente al centro */
+  justify-content: space-between; /* Distribuisce lo spazio tra i figli */
+  gap: 10px; /* Spazio tra il paragrafo e il pulsante */
+  margin-top: 10px;
+  flex-direction: row; /* Disposizione su una singola riga */
+  width: 100%; /* Assicura che il contenitore occupi tutta la larghezza disponibile */
+}
+
+.settings-container p {
+  margin: 0; /* Rimuove il margine predefinito del paragrafo */
+  flex: 1; /* Occupa tutto lo spazio disponibile */
+}
+
+.settings-container button {
+  background-color: #df914c;
+  color: white;
+  border: 1px solid white; 
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0; /* Impedisce che il pulsante si restringa */
+}
+
+/* Stili specifici per schermi più grandi (desktop) */
+@media (max-width: 1025px) {
+  .settings-container {
+    align-items: flex-start; /* Allinea all'inizio in verticale */
+    justify-content: flex-start; /* Allinea all'inizio in orizzontale */
+    font-size: 11px;
+  }
+}
+
+
+.submit-button {
+  background-color: #df914c;
+  color: white;
+  text-transform: uppercase;
+  border: 1px solid white; 
+  border-radius: 8px;
+}
+
+
+
+  .profile-info {
+ 
+
+      .status {
+        font-size: 1.2rem;
+
+        &.confirmed {
+          color: green; // Colore per stato confermato
+        }
+        
+        &.rejected {
+          color: red; // Colore per stato rifiutato
+        }
+        
+        &.pending {
+          color: orange; // Colore per stato in attesa
+        }
+      }
+    
+    }
+
+

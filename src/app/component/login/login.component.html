@@ -1,0 +1,63 @@
+<div style="margin-top: 70px; margin-left: 10px; margin-right: 10px;">
+  <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px; width: 100%;">
+    <h2 style="text-transform: uppercase; text-align: center; flex-grow: 1;">Login</h2>
+   
+  </div>
+  
+  <div class="login-container" style="max-width: 400px; margin: 0 auto; padding: 20px; border: 1px solid; border-radius: 8px; background-color: transparent;">
+    <form (ngSubmit)="onSubmit(loginForm)" #loginForm="ngForm">
+      <p style="text-align: center; margin-top: 5px; margin-bottom: 5px; font-size: 15px;">Ingresa tus credenciales y espera unos segundos</p>
+      <!-- Messaggio di errore -->
+      <div *ngIf="errorMessage" style="color: red; margin-bottom: 15px; text-align: center;">
+        {{ errorMessage }}
+      </div>
+
+
+
+      <!-- Campo Username -->
+      <div style="margin-bottom: 15px;">
+        <label for="username" style="display: block; margin-bottom: 5px; font-weight: bold;">Username:</label>
+        <input [(ngModel)]="username" 
+               type="text" 
+               id="username" 
+               name="username" 
+               placeholder="Ingresar nombre de usuario" 
+               style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" 
+               required
+               [ngClass]="{'invalid-input': loginForm.submitted && !loginForm.controls['username'].valid}">
+      </div>
+
+      <div style="margin-bottom: 15px; position: relative;">
+        <label for="password" style="display: block; margin-bottom: 5px; font-weight: bold;">Password:</label>
+        
+        <input [(ngModel)]="password" 
+               [type]="showPassword ? 'text' : 'password'" 
+               id="password" 
+               name="password" 
+               placeholder="Ingresar contraseña" 
+               style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;" 
+               required
+               [ngClass]="{'invalid-input': loginForm.submitted && !loginForm.controls['password'].valid}">
+        
+        <!-- Bottone per mostrare/oscurare password -->
+        <button type="button" 
+                (click)="togglePasswordVisibility()" 
+                style="position: absolute; right: 10px; top: 38px; background: none; border: none; cursor: pointer;">
+          <!-- Mostra un'icona per mostrare/oscurare la password -->
+          <span *ngIf="!showPassword">👁️</span>
+          <span *ngIf="showPassword">🙈</span>
+        </button>
+      </div>
+      
+
+      <!-- Pulsante di Invio -->
+      <button 
+        type="submit" 
+        [disabled]="isButtonClicked"  
+        class="login-button"
+        style="width: 100%; padding: 10px; background-color: #df914c; color: white; border: none; border-radius: 4px; cursor: pointer;">
+        Iniciar Sesión
+      </button>
+    </form>
+  </div>
+</div>

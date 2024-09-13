@@ -1,0 +1,31 @@
+<div class="grid">
+  <div class="header">
+    <h2 style="text-transform: uppercase;">ayampe</h2>
+  </div>
+
+  <div class="button-group">
+    <button class="btn-custom" routerLink="/around">
+      <span class="btn-text" style="text-transform: uppercase;">Alrededores</span>
+      <span class="btn-icon"><i class="fas fa-chevron-right"></i></span>
+    </button>
+    <button class="btn-custom" routerLink="/info">
+      <span class="btn-text" style="text-transform: uppercase;">Cómo llegar</span>
+      <span class="btn-icon"><i class="fas fa-chevron-right"></i></span>
+    </button>
+  </div>
+
+  <div class="content-map-container">
+
+    
+    <div id="mappa">
+      <google-map
+        [center]="center"
+        [zoom]="zoom"
+        [options]="options"
+        (mapReady)="onMapReady($event)">
+        <map-marker [position]="center"></map-marker>
+        <!-- Aggiungi il renderer delle direzioni qui -->
+      </google-map>
+    </div>
+  </div>
+</div>
